@@ -66,8 +66,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         console.log("No active session - User is a guest");
         setUser(null);
       } else {
-      console.error("Auth status check failed:", error);
-      setUser(null);
+        console.error("Auth status check failed:", error);
+        setUser(null);
       }
     } finally {
       setIsLoading(false);
@@ -83,7 +83,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       await account.createEmailPasswordSession(email, password);
       await checkUserStatus();
       return true;
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.code === 401 && error?.message?.includes('active')) {
+        // Session already active, just refresh user status
+        await checkUserStatus();
+        return true;
+      }
       console.error("Login failed:", error);
       return false;
     }
@@ -111,7 +116,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
       // 2. CRITICAL: Create Session (Log them in immediately)
       // This is required before sending verification emails
-      await account.createEmailPasswordSession(email, password);
+      try {
+        await account.createEmailPasswordSession(email, password);
+      } catch (sessionError: any) {
+        if (sessionError?.code === 401 && sessionError?.message?.includes('active')) {
+          console.log("Session already active, proceeding to verification...");
+        } else {
+          throw sessionError;
+        }
+      }
 
       // 3. Send Verification Email (now user has active session)
       await account.createVerification(`${window.location.origin}/verify-email`);
