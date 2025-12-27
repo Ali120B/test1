@@ -32,7 +32,6 @@ export interface DarsItem {
   videoUrl?: string;
   attachments?: Attachment[];
   createdAt: Date;
-  views?: number;
   seriesId?: string;
   seriesOrder?: number;
 }
@@ -119,7 +118,7 @@ interface DataContextType {
 
   // Analytics
   trackView: (itemId: string, itemType: "dars" | "question") => Promise<void>;
-  getStats: () => Promise<{ totalDars: number, totalQuestions: number, totalUsers: number, totalViews: number }>;
+  getStats: () => Promise<{ totalDars: number, totalQuestions: number, totalUsers: number }>;
 
   // Refresh
   refreshData: () => Promise<void>;
@@ -335,10 +334,10 @@ export function DataProvider({ children }: { children: ReactNode }) {
         'dars_progress',
         ID.unique(),
         {
-        userId: user.id,
-        darsId,
-        lastVisitedAt: now,
-        completed: false,
+          userId: user.id,
+          darsId,
+          lastVisitedAt: now,
+          completed: false,
         },
         [
           Permission.read(Role.user(user.id)),
@@ -431,7 +430,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
         videoUrl: item.videoUrl || "",
         image: item.image || "",
         content: item.content ? sanitizeHtml(item.content) : "",
-        views: item.views || 0,
         attachments: JSON.stringify(item.attachments || []),
         seriesId: item.seriesId,
         seriesOrder: item.seriesOrder
@@ -556,7 +554,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
         askedBy: question.author,
         category: question.category,
         date: new Date().toISOString(),
-        views: 0,
         answers: JSON.stringify(initialAnswers),
         attachments: JSON.stringify(question.attachments || [])
       };
@@ -904,15 +901,8 @@ export function DataProvider({ children }: { children: ReactNode }) {
   // ===== ANALYTICS OPERATIONS =====
 
   const trackView = async (itemId: string, itemType: "dars" | "question") => {
-    if (!itemId || itemType !== 'dars') return; // Only track views for dars
-    try {
-      const doc = await databases.getDocument(DB_ID, 'dars', itemId);
-      await databases.updateDocument(DB_ID, 'dars', itemId, {
-        views: (doc.views || 0) + 1
-      });
-    } catch (error) {
-      console.error("Error tracking view:", error);
-    }
+    // Analytics disabled as views attribute was removed from schema
+    return;
   };
 
   const getStats = async () => {
@@ -920,7 +910,6 @@ export function DataProvider({ children }: { children: ReactNode }) {
       totalDars: dars.length,
       totalQuestions: questions.length,
       totalUsers: 0,
-      totalViews: dars.reduce((acc, curr) => acc + (curr.views || 0), 0),
     };
   };
 
@@ -932,14 +921,14 @@ export function DataProvider({ children }: { children: ReactNode }) {
         getRandomDars,
         addDars,
         updateDars,
-    deleteDars,
+        deleteDars,
 
-    series,
-    addSeries,
-    deleteSeries,
+        series,
+        addSeries,
+        deleteSeries,
 
-    darsProgress,
-    touchDarsProgress,
+        darsProgress,
+        touchDarsProgress,
         setDarsCompleted,
 
         questions,
