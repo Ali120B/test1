@@ -10,7 +10,11 @@ export default function Index() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const { deferredPrompt, promptToInstall } = useInstallPrompt();
-  const { dars } = useData();
+  const { dars, questions } = useData();
+
+  const formatCount = (count: number) => {
+    return count > 1000 ? "1000+" : count;
+  };
 
   // If already logged in, send users to their landing (dashboard)
   useEffect(() => {
@@ -79,7 +83,17 @@ export default function Index() {
                 </Link>
               </div>
 
-
+              <div className="hidden lg:flex pt-8 items-center gap-8 border-t border-border">
+                <div className="text-center sm:text-left">
+                  <p className="text-3xl font-bold text-foreground">{formatCount(dars.length)}</p>
+                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Lessons</p>
+                </div>
+                <div className="w-px h-12 bg-border"></div>
+                <div className="text-center sm:text-left">
+                  <p className="text-3xl font-bold text-foreground">{formatCount(questions.length)}</p>
+                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Questions</p>
+                </div>
+              </div>
             </div>
 
             {/* Right Visual */}
