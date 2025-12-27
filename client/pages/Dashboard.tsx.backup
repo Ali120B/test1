@@ -1,0 +1,122 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { useAuth } from "@/contexts/AuthContext";
+import { useData } from "@/contexts/DataContext";
+import { BookOpen, MessageCircle, Play, Sparkles, TrendingUp, Award, Clock, ArrowRight, Star, Bookmark, Download, Settings } from "lucide-react";
+import { useInstallPrompt } from "@/hooks/useInstallPrompt";
+
+
+export default function Dashboard() {
+  const navigate = useNavigate();
+  const { isAuthenticated, user } = useAuth();
+  const { dars, darsProgress, savedItems, getRandomDars, getRandomQuestions, refreshData } = useData();
+  const { deferredPrompt, promptToInstall } = useInstallPrompt();
+  const isMobile = useIsMobile();
+
+
+  // Placeholder for widget state - temporarily removed
+
+  // Redirect if not authenticated (run as a side-effect)
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login", { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+
+  const recommendedDars = getRandomDars(3);
+  const recommendedQuestions = getRandomQuestions(3);
+  const firstName = (user?.username || user?.email || "Friend").split("@")[0];
+
+  // Placeholder for widget functions - temporarily removed
+
+
+  const continueDars = useMemo(() => {
+    if (!darsProgress.length || !dars.length) return [];
+
+    const darsById = new Map(dars.map((d) => [d.id, d] as const));
+    return darsProgress
+      .slice()
+      .sort((a, b) => b.lastVisitedAt.getTime() - a.lastVisitedAt.getTime())
+      .map((p) => ({ progress: p, dars: darsById.get(p.darsId) }))
+      .filter((x): x is { progress: typeof darsProgress[number]; dars: NonNullable<ReturnType<typeof darsById.get>> } => Boolean(x.dars))
+      .slice(0, 3);
+  }, [dars, darsProgress]);
+
+  const readLaterDars = useMemo(() => {
+    if (!savedItems.length || !dars.length) return [];
+    const darsById = new Map(dars.map((d) => [d.id, d] as const));
+
+    return savedItems
+      .filter((s) => s.itemType === "dars" && s.listType === "read_later")
+      .slice()
+      .sort((a, b) => b.savedAt.getTime() - a.savedAt.getTime())
+      .map((s) => darsById.get(s.itemId))
+      .filter((x): x is NonNullable<ReturnType<typeof darsById.get>> => Boolean(x))
+      .slice(0, 3);
+  }, [dars, savedItems]);
+
+  return (
+    <div
+      className="flex flex-col min-h-screen bg-background font-sans transition-colors duration-300"
+    >
+      {/* Pull to refresh indicator - temporarily removed */}
+
+      <div className="flex-grow">
+        {/* Welcome Section */}
+        <div className="relative py-12 px-4 sm:px-6 lg:px-8 overflow-hidden rounded-b-3xl shadow-lg border-b border-border/50 bg-emerald-900 dark:bg-background">
+          <div className="absolute inset-0 animated-gradient opacity-90 dark:opacity-40"></div>
+          <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/20 to-transparent"></div>
+
+          <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-white text-center md:text-left">
+              <h1 className="text-3xl sm:text-5xl font-extrabold mb-2 tracking-tight">
+                Welcome back, <span className="text-emerald-200 dark:text-emerald-400">{firstName}</span>!
+              </h1>
+              <p className="text-emerald-50 dark:text-muted-foreground text-base md:text-lg opacity-90 max-w-xl">
+                Continue your journey of knowledge and explore the latest insights from our educators.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="px-4 sm:px-6 lg:px-8 pb-16 pt-12">
+          <div className="max-w-7xl mx-auto text-center py-16">
+            <div className="inline-block p-6 bg-muted rounded-full mb-4">
+              <Settings className="w-8 h-8 text-muted-foreground" />
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Dashboard widgets coming soon</h3>
+            <p className="text-muted-foreground">
+              The widget system is being implemented.
+            </p>
+          </div>
+
+            {deferredPrompt && (
+              <div className="mt-12 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div className="bg-gradient-to-r from-primary/10 to-emerald-500/10 border border-primary/20 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-xl font-bold text-foreground mb-2">Install the App</h3>
+                    <p className="text-muted-foreground">Get quick access to your lessons and Q&A by installing the app on your device.</p>
+                  </div>
+                  <button
+                    onClick={promptToInstall}
+                    className="flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-bold rounded-xl shadow-lg hover:shadow-primary/20 hover:scale-105 transition-all"
+                  >
+                    <Download size={20} />
+                    Install Now
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
