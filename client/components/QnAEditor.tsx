@@ -413,7 +413,7 @@ export default function QnAEditor({ showPreview = false }: { showPreview?: boole
                             disabled={!answerInputs[item.id]}
                             className="w-full flex items-center justify-center gap-1.5 px-3 py-1.5 bg-secondary text-secondary-foreground text-[10px] sm:text-xs font-bold rounded-md hover:bg-secondary/90 disabled:opacity-50 transition-all border border-secondary/20 shadow-sm"
                           >
-                            <Plus size={12} className="sm:size-14" /> Submit Answer
+                            <Plus size={16} /> Submit Answer
                           </button>
                         </div>
                       )}
@@ -424,14 +424,14 @@ export default function QnAEditor({ showPreview = false }: { showPreview?: boole
                           className="p-1.5 sm:p-2 bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary rounded-lg transition"
                           title="Edit"
                         >
-                          <Edit2 size={16} className="sm:size-20" />
+                          <Edit2 size={18} />
                         </button>
                         <button
                           onClick={() => handleDelete(item.id)}
                           className="p-1.5 sm:p-2 bg-muted hover:bg-destructive/10 text-muted-foreground hover:text-destructive rounded-lg transition"
                           title="Delete"
                         >
-                          <Trash2 size={16} className="sm:size-20" />
+                          <Trash2 size={18} />
                         </button>
                       </div>
                     </div>
