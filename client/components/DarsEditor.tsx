@@ -228,15 +228,15 @@ export default function DarsEditor() {
 
       {/* Add New Dars Section */}
       <div>
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-foreground">
+        <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-2xl font-bold text-foreground">
             Dars Management
           </h2>
           <button
             onClick={() => setIsAddingNew(!isAddingNew)}
-            className="flex items-center gap-2 px-4 py-2.5 sm:px-6 sm:py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-lg transition text-sm sm:text-base"
+            className="flex items-center gap-1.5 px-3 py-2 sm:px-6 sm:py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-lg transition text-xs sm:text-base"
           >
-            <Plus size={20} className="w-5 h-5 sm:w-6 sm:h-6" />
+            <Plus size={16} className="w-4 h-4 sm:w-6 sm:h-6" />
             <span className="hidden sm:inline">Add New Dars</span>
             <span className="sm:hidden">Add New</span>
           </button>
@@ -498,7 +498,7 @@ export default function DarsEditor() {
                         className="text-muted-foreground hover:text-destructive"
                       >
                         <X size={16} />
-                    </button>
+                      </button>
                     )}
                   </div>
                 </div>
@@ -644,7 +644,7 @@ export default function DarsEditor() {
                           className="text-muted-foreground hover:text-destructive"
                         >
                           <X size={16} />
-                      </button>
+                        </button>
                       )}
                     </div>
                   </div>

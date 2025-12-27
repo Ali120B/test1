@@ -119,17 +119,18 @@ export default function SeriesEditor() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Series Management</h2>
-          <p className="text-muted-foreground">Create and manage dars series (playlists)</p>
+          <h2 className="text-lg sm:text-2xl font-bold text-foreground">Series Management</h2>
+          <p className="text-xs sm:text-base text-muted-foreground">Create and manage dars series (playlists)</p>
         </div>
         <button
           onClick={() => setIsAddingNew(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 bg-primary text-primary-foreground font-bold rounded-lg hover:bg-primary/90 transition-colors text-xs sm:text-base whitespace-nowrap"
         >
-          <Plus size={18} />
-          Add Series
+          <Plus size={16} />
+          <span className="hidden sm:inline">Add Series</span>
+          <span className="sm:hidden">Add New</span>
         </button>
       </div>
 
