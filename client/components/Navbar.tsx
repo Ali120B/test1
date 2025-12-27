@@ -47,9 +47,9 @@ function GlobalSearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-4 px-4">
-      <div 
-        className="fixed inset-0 bg-black/40" 
-        onClick={onClose} 
+      <div
+        className="fixed inset-0 bg-black/40"
+        onClick={onClose}
       />
       <div className="relative w-full max-w-2xl bg-card border border-border rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
         <div className="flex items-center border-b border-border px-4 py-3">
@@ -239,9 +239,9 @@ export default function Navbar() {
             )}
             <button
               onClick={() => setMobileSearchOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 hover:bg-muted border border-border/50 rounded-full text-muted-foreground hover:text-foreground transition-all text-sm"
+              className="flex items-center gap-1.5 px-2 py-1 bg-muted/50 hover:bg-muted border border-border/50 rounded-full text-muted-foreground hover:text-foreground transition-all text-xs"
             >
-              <Search size={16} />
+              <Search size={14} />
               <span className="font-medium">Search</span>
             </button>
             {isAdmin && (
@@ -444,9 +444,9 @@ export default function Navbar() {
 
       {/* Mobile Search Modal */}
       {mobileSearchOpen && (
-        <GlobalSearchModal 
-          isOpen={mobileSearchOpen} 
-          onClose={() => setMobileSearchOpen(false)} 
+        <GlobalSearchModal
+          isOpen={mobileSearchOpen}
+          onClose={() => setMobileSearchOpen(false)}
         />
       )}
     </nav>

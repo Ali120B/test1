@@ -32,7 +32,7 @@ export default function MobileBottomNav() {
   }, [location.pathname]);
 
   return (
-    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
+    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 md:hidden">
       <div className="relative">
         {/* Outer glow effect */}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-primary/8 to-transparent rounded-full blur-2xl scale-110 opacity-60" />
@@ -41,7 +41,7 @@ export default function MobileBottomNav() {
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent rounded-full blur-lg" />
 
         {/* Main glass container with enhanced rounded pill shape */}
-        <div className="relative bg-white/12 dark:bg-black/25 backdrop-blur-3xl border border-white/25 dark:border-white/15 rounded-full shadow-2xl shadow-black/25 px-8 py-4 ring-1 ring-white/10">
+        <div className="relative bg-white/12 dark:bg-black/25 backdrop-blur-3xl border border-white/25 dark:border-white/15 rounded-full shadow-2xl shadow-black/25 px-4 py-2 ring-1 ring-white/10">
           {/* Inner highlight gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/8 via-transparent to-black/5 rounded-full" />
 
@@ -56,7 +56,7 @@ export default function MobileBottomNav() {
                   key={item.path}
                   onClick={() => navigate(item.path)}
                   className={cn(
-                    "relative flex items-center justify-center w-14 h-14 rounded-full group",
+                    "relative flex items-center justify-center w-11 h-11 rounded-full group",
                     isActive
                       ? "text-primary"
                       : "text-muted-foreground/70 hover:text-muted-foreground"
@@ -73,7 +73,7 @@ export default function MobileBottomNav() {
 
                   {/* Icon with premium styling */}
                   <item.icon className={cn(
-                    "w-5 h-5 relative z-10 drop-shadow-sm",
+                    "w-[18px] h-[18px] relative z-10 drop-shadow-sm",
                     isActive ? "filter brightness-110" : ""
                   )} />
                 </button>
@@ -90,15 +90,15 @@ export default function MobileBottomNav() {
               if (activeVisibleIndex === -1) return null;
 
               // Calculate spacing: padding between buttons is handled by flex gap-2
-              // Each button is w-14 (56px) + gap-2 (8px) = 64px
+              // Each button is w-11 (44px) + gap-2 (8px) = 52px
               // The items are centered, so we need to calculate offset relative to center
               const count = visibleItems.length;
-              const totalWidth = (count * 56) + ((count - 1) * 8);
-              const xPos = (activeVisibleIndex * 64) - (totalWidth / 2) + 28;
+              const totalWidth = (count * 44) + ((count - 1) * 8);
+              const xPos = (activeVisibleIndex * 52) - (totalWidth / 2) + 22;
 
               return (
                 <div
-                  className="absolute -bottom-1 w-1.5 h-1.5 bg-primary/90 backdrop-blur-sm rounded-full shadow-lg shadow-primary/30 ring-1 ring-primary/40 transition-transform duration-300 ease-out"
+                  className="absolute -bottom-0.5 w-1.5 h-1.5 bg-primary/90 backdrop-blur-sm rounded-full shadow-lg shadow-primary/30 ring-1 ring-primary/40 transition-transform duration-300 ease-out"
                   style={{ transform: `translateX(${xPos}px)` }}
                 />
               );
