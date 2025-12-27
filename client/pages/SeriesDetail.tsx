@@ -142,11 +142,15 @@ export default function SeriesDetail() {
             </button>
 
             <div className="text-center">
-              <div className="inline-flex items-center justify-center p-3 bg-white/10 backdrop-blur-md rounded-2xl mb-6 shadow-xl border border-white/20">
-                <BookOpen className="w-8 h-8 text-white" />
+              <div className="inline-flex items-center justify-center overflow-hidden w-20 h-20 sm:w-28 sm:h-28 bg-white/10 backdrop-blur-md rounded-2xl mb-6 shadow-xl border border-white/20">
+                {currentSeries.image && (currentSeries.image.startsWith("http") || currentSeries.image.startsWith("/")) ? (
+                  <img src={currentSeries.image} alt={currentSeries.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-4xl sm:text-6xl">{currentSeries.image || "📚"}</span>
+                )}
               </div>
               <h1 className="text-3xl sm:text-6xl font-extrabold text-white mb-6 tracking-tight drop-shadow-sm">
-                Dars
+                {currentSeries.name}
               </h1>
               <p className="text-white/90 text-lg sm:text-xl max-w-2xl mx-auto font-light leading-relaxed">
                 {currentSeries.description || "Explore this curated collection of Islamic teachings"}

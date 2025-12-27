@@ -232,8 +232,8 @@ export default function Dars() {
                     <button
                       onClick={isListening ? stopVoiceSearch : startVoiceSearch}
                       className={`absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-lg transition-all duration-200 ${isListening
-                          ? 'text-red-500 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 animate-pulse'
-                          : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
+                        ? 'text-red-500 bg-red-50 hover:bg-red-100 dark:bg-red-900/20 animate-pulse'
+                        : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
                         }`}
                       title={isListening ? "Stop voice search" : "Start voice search"}
                     >
@@ -303,11 +303,15 @@ export default function Dars() {
                     className="relative group cursor-pointer rounded-2xl overflow-hidden border border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 bg-gradient-to-br from-primary/5 to-primary/10"
                   >
                     <div className="aspect-video bg-muted relative">
-                      {s.image ? (
+                      {s.image && (s.image.startsWith("http") || s.image.startsWith("/")) ? (
                         <img src={s.image} alt={s.name} className="w-full h-full object-cover" loading="lazy" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-primary/10">
-                          <Layers className="w-12 h-12 text-primary/40" />
+                          {s.image ? (
+                            <span className="text-5xl">{s.image}</span>
+                          ) : (
+                            <Layers className="w-12 h-12 text-primary/40" />
+                          )}
                         </div>
                       )}
                       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">

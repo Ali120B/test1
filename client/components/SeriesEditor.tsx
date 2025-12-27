@@ -6,7 +6,7 @@ import { Series } from "@/contexts/DataContext";
 import ConfirmModal from "./ConfirmModal";
 
 export default function SeriesEditor() {
-  const { series, addSeries, deleteSeries, dars, uploadFile } = useData();
+  const { series, addSeries, updateSeries, deleteSeries, dars, uploadFile } = useData();
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingItem, setEditingItem] = useState<Partial<Series> | null>(null);
@@ -75,20 +75,17 @@ export default function SeriesEditor() {
           }
         }
 
-        // For now, we'll need to delete and recreate since we don't have an update function
-        await deleteSeries(editingId);
-        await addSeries({
+        await updateSeries(editingId, {
           name: editingItem.name || "",
           description: editingItem.description || "",
           image: finalImage,
         });
+
         setEditingId(null);
         setEditingItem(null);
         setEditingImageFile(null);
-        toast.success("Series updated successfully!");
       } catch (error) {
         console.error("Error updating series:", error);
-        toast.error("Failed to update series");
       }
     }
   };
@@ -307,10 +304,16 @@ export default function SeriesEditor() {
               <div className="space-y-3">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="text-2xl">{item.image}</div>
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-muted rounded-lg overflow-hidden border border-border">
+                      {item.image && (item.image.startsWith("http") || item.image.startsWith("/")) ? (
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <span className="text-2xl">{item.image || "📚"}</span>
+                      )}
+                    </div>
                     <div>
-                      <h3 className="font-semibold text-foreground">{item.name}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <h3 className="font-semibold text-foreground line-clamp-1">{item.name}</h3>
+                      <p className="text-xs text-muted-foreground whitespace-nowrap">
                         {getSeriesDarsCount(item.id)} dars
                       </p>
                     </div>

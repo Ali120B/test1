@@ -83,6 +83,7 @@ interface DataContextType {
 
   series: Series[];
   addSeries: (series: Omit<Series, "id">) => Promise<Series>;
+  updateSeries: (id: string, series: Partial<Series>) => Promise<void>;
   deleteSeries: (id: string) => Promise<void>;
 
   darsProgress: DarsProgress[];
@@ -520,6 +521,20 @@ export function DataProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const updateSeries = async (id: string, seriesData: Partial<Series>): Promise<void> => {
+    try {
+      const data = { ...seriesData };
+      delete (data as any).id;
+      await databases.updateDocument(DB_ID, 'series', id, data);
+      setSeries(prev => prev.map(s => s.id === id ? { ...s, ...seriesData } : s));
+      toast.success("Series updated successfully");
+    } catch (error) {
+      console.error("Error updating series:", error);
+      toast.error("Failed to update series");
+      throw error;
+    }
+  };
+
   const deleteSeries = async (id: string): Promise<void> => {
     try {
       await databases.deleteDocument(DB_ID, 'series', id);
@@ -925,6 +940,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
 
         series,
         addSeries,
+        updateSeries,
         deleteSeries,
 
         darsProgress,
