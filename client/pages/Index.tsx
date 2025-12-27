@@ -79,7 +79,7 @@ export default function Index() {
                 </Link>
               </div>
 
-              <div className="pt-8 flex flex-col sm:flex-row items-center gap-8 border-t border-border">
+              <div className="hidden sm:flex pt-8 items-center gap-8 border-t border-border">
                 <div className="text-center sm:text-left">
                   <p className="text-3xl font-bold text-foreground">500+</p>
                   <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Lessons</p>
