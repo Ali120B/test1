@@ -79,22 +79,7 @@ export default function Index() {
                 </Link>
               </div>
 
-              <div className="hidden sm:flex pt-8 items-center gap-8 border-t border-border">
-                <div className="text-center sm:text-left">
-                  <p className="text-3xl font-bold text-foreground">500+</p>
-                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Lessons</p>
-                </div>
-                <div className="hidden sm:block w-px h-12 bg-border"></div>
-                <div className="text-center sm:text-left">
-                  <p className="text-3xl font-bold text-foreground">10K+</p>
-                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Members</p>
-                </div>
-                <div className="hidden sm:block w-px h-12 bg-border"></div>
-                <div className="text-center sm:text-left">
-                  <p className="text-3xl font-bold text-foreground">1K+</p>
-                  <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Questions</p>
-                </div>
-              </div>
+
             </div>
 
             {/* Right Visual */}
