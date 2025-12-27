@@ -35,12 +35,24 @@ export default function DarsDetail() {
 
     if (isLoading) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-screen bg-background">
-                <div className="relative">
-                    <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary/20 border-t-primary"></div>
-                    <div className="absolute inset-0 rounded-full border-4 border-primary/10 animate-ping"></div>
+            <div className="flex flex-col min-h-screen bg-background font-sans transition-colors duration-300">
+                <div className="flex-grow p-4 sm:p-8">
+                    <div className="max-w-5xl mx-auto space-y-8">
+                        <div className="h-[300px] sm:h-[400px] bg-muted skeleton rounded-3xl w-full" />
+                        <div className="bg-card border border-border rounded-2xl p-6 sm:p-12 space-y-6">
+                            <div className="h-10 bg-muted skeleton rounded-xl w-3/4" />
+                            <div className="flex gap-4">
+                                <div className="h-6 bg-muted skeleton rounded-lg w-32" />
+                                <div className="h-6 bg-muted skeleton rounded-lg w-32" />
+                            </div>
+                            <div className="space-y-3">
+                                <div className="h-4 bg-muted skeleton rounded w-full" />
+                                <div className="h-4 bg-muted skeleton rounded w-full" />
+                                <div className="h-4 bg-muted skeleton rounded w-4/5" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p className="mt-4 text-muted-foreground animate-pulse">Loading lesson...</p>
             </div>
         );
     }

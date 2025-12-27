@@ -26,12 +26,16 @@ export default defineConfig(({ mode }) => ({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: 'auto',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Flare Hub - Islamic Knowledge',
-        short_name: 'FlareHub',
+        name: 'Islami Zindagi - Islamic Knowledge',
+        short_name: 'IslamiZindagi',
         description: 'Premium Islamic Knowledge Sharing Platform',
         theme_color: '#10b981',
+        background_color: '#ffffff',
+        display: 'standalone',
+        start_url: '/',
         icons: [
           {
             src: 'pwa-192x192.png',

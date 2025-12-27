@@ -1,5 +1,6 @@
 /** @import must precede all other statements */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -149,8 +150,14 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: 'Outfit', 'Inter', sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     background-color: hsl(var(--background));
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .font-arabic {
+    font-family: 'Amiri', serif;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
@@ -334,16 +341,58 @@
   /* Shimmer animation for skeleton loaders */
   @keyframes shimmer {
     0% {
-      transform: translateX(-100%);
+      background-position: -200% 0;
     }
-
     100% {
-      transform: translateX(100%);
+      background-position: 200% 0;
     }
   }
 
   .animate-shimmer {
-    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(128, 128, 128, 0.05) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  [data-theme="dark"] .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.03) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-muted/40;
+  }
+
+  .skeleton::after {
+    @apply absolute inset-0 content-[''];
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(128, 128, 128, 0.08) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  [data-theme="dark"] .skeleton::after {
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.05) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
   }
 
   /* Enhanced mobile scrolling */

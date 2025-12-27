@@ -84,8 +84,14 @@ export default function SeriesDetail() {
   if (isLoading) {
     return (
       <div className="flex flex-col min-h-screen bg-background font-sans transition-colors duration-300">
-        <div className="flex-grow flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="flex-grow p-4 sm:p-8">
+          <div className="max-w-7xl mx-auto space-y-8">
+            <div className="h-64 bg-muted skeleton rounded-3xl w-full" />
+            <div className="space-y-4">
+              <div className="h-12 bg-muted skeleton rounded-xl w-3/4" />
+              <div className="h-6 bg-muted skeleton rounded-lg w-1/2" />
+            </div>
+          </div>
         </div>
       </div>
     );

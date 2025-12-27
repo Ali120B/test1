@@ -1,22 +1,18 @@
 export function DarsCardSkeleton() {
     return (
         <div className="bg-card rounded-2xl overflow-hidden border border-border/50 h-full relative">
-            {/* Shimmer effect overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer z-10" />
-
             {/* Thumbnail skeleton with play button */}
-            <div className="aspect-video bg-muted relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-muted via-muted/80 to-muted/60" />
+            <div className="aspect-video bg-muted skeleton relative overflow-hidden">
                 {/* Play button skeleton */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 bg-muted/80 backdrop-blur-sm rounded-full flex items-center justify-center">
-                        <div className="w-6 h-6 bg-muted rounded-sm ml-0.5" />
+                    <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                        <div className="w-6 h-6 bg-white/40 rounded-sm ml-0.5" />
                     </div>
                 </div>
                 {/* Badges skeleton */}
                 <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                    <div className="h-6 bg-black/20 backdrop-blur rounded-lg w-16" />
-                    <div className="h-6 bg-black/20 backdrop-blur rounded-lg w-20" />
+                    <div className="h-6 bg-white/20 backdrop-blur rounded-lg w-16" />
+                    <div className="h-6 bg-white/20 backdrop-blur rounded-lg w-20" />
                 </div>
             </div>
 
@@ -24,38 +20,30 @@ export function DarsCardSkeleton() {
                 {/* Action buttons skeleton */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="h-5 bg-muted rounded w-12" />
-                        <div className="h-5 bg-muted rounded w-4" />
+                        <div className="h-5 bg-muted skeleton rounded w-12" />
                     </div>
-                <div className="flex gap-2">
-                        <div className="w-10 h-10 bg-muted rounded-full" />
-                        <div className="w-10 h-10 bg-muted rounded-full" />
+                    <div className="flex gap-2">
+                        <div className="w-10 h-10 bg-muted skeleton rounded-full" />
+                        <div className="w-10 h-10 bg-muted skeleton rounded-full" />
                     </div>
                 </div>
 
-                {/* Title skeleton with gradient effect */}
+                {/* Title skeleton */}
                 <div className="space-y-2">
-                    <div className="h-7 bg-muted rounded-lg w-full animate-pulse" style={{ animationDelay: '0.1s' }} />
-                    <div className="h-7 bg-muted/80 rounded-lg w-3/4 animate-pulse" style={{ animationDelay: '0.2s' }} />
+                    <div className="h-7 bg-muted skeleton rounded-lg w-full" />
+                    <div className="h-7 bg-muted skeleton rounded-lg w-3/4" />
                 </div>
 
                 {/* Description skeleton */}
                 <div className="space-y-2">
-                    <div className="h-4 bg-muted/60 rounded w-full animate-pulse" style={{ animationDelay: '0.3s' }} />
-                    <div className="h-4 bg-muted/60 rounded w-5/6 animate-pulse" style={{ animationDelay: '0.4s' }} />
-                    <div className="h-4 bg-muted/60 rounded w-4/6 animate-pulse" style={{ animationDelay: '0.5s' }} />
+                    <div className="h-4 bg-muted skeleton rounded w-full" />
+                    <div className="h-4 bg-muted skeleton rounded w-5/6" />
                 </div>
 
                 {/* Footer skeleton */}
                 <div className="flex items-center justify-between pt-4 border-t border-border/30">
-                    <div className="flex items-center gap-2">
-                        <div className="w-5 h-5 bg-muted rounded-full animate-pulse" style={{ animationDelay: '0.6s' }} />
-                        <div className="h-4 bg-muted rounded w-20 animate-pulse" style={{ animationDelay: '0.7s' }} />
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 bg-muted rounded animate-pulse" style={{ animationDelay: '0.8s' }} />
-                        <div className="h-4 bg-muted rounded w-16 animate-pulse" style={{ animationDelay: '0.9s' }} />
-                    </div>
+                    <div className="h-4 bg-muted skeleton rounded w-20" />
+                    <div className="h-4 bg-muted skeleton rounded w-16" />
                 </div>
             </div>
         </div>
@@ -65,44 +53,35 @@ export function DarsCardSkeleton() {
 export function QuestionCardSkeleton() {
     return (
         <div className="bg-card rounded-2xl p-6 border border-border/50 relative overflow-hidden">
-            {/* Shimmer effect overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer z-10" />
-
             {/* Header skeleton */}
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                    <div className="h-6 bg-primary/20 rounded-full w-20 animate-pulse" style={{ animationDelay: '0.1s' }} />
-                    <div className="h-4 bg-muted/60 rounded w-16 animate-pulse" style={{ animationDelay: '0.2s' }} />
-            </div>
+                    <div className="h-6 bg-primary/10 skeleton rounded-full w-20" />
+                    <div className="h-4 bg-muted skeleton rounded w-16" />
+                </div>
                 <div className="flex gap-2">
-                    <div className="w-8 h-8 bg-muted rounded-full animate-pulse" style={{ animationDelay: '0.3s' }} />
-                    <div className="w-8 h-8 bg-muted rounded-full animate-pulse" style={{ animationDelay: '0.4s' }} />
+                    <div className="w-8 h-8 bg-muted skeleton rounded-full" />
+                    <div className="w-8 h-8 bg-muted skeleton rounded-full" />
                 </div>
             </div>
 
             {/* Title skeleton */}
             <div className="space-y-2 mb-4">
-                <div className="h-7 bg-muted rounded-lg w-full animate-pulse" style={{ animationDelay: '0.5s' }} />
-                <div className="h-7 bg-muted/80 rounded-lg w-4/5 animate-pulse" style={{ animationDelay: '0.6s' }} />
+                <div className="h-7 bg-muted skeleton rounded-lg w-full" />
+                <div className="h-7 bg-muted skeleton rounded-lg w-4/5" />
             </div>
 
             {/* Content skeleton */}
             <div className="space-y-2 mb-6">
-                <div className="h-4 bg-muted/60 rounded w-full animate-pulse" style={{ animationDelay: '0.7s' }} />
-                <div className="h-4 bg-muted/60 rounded w-full animate-pulse" style={{ animationDelay: '0.8s' }} />
-                <div className="h-4 bg-muted/60 rounded w-3/4 animate-pulse" style={{ animationDelay: '0.9s' }} />
+                <div className="h-4 bg-muted skeleton rounded w-full" />
+                <div className="h-4 bg-muted skeleton rounded w-full" />
+                <div className="h-4 bg-muted skeleton rounded w-3/4" />
             </div>
 
             {/* Footer skeleton */}
             <div className="flex items-center justify-between pt-4 border-t border-border/30">
-                <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-muted rounded-full animate-pulse" style={{ animationDelay: '1.0s' }} />
-                    <div className="h-4 bg-muted rounded w-24 animate-pulse" style={{ animationDelay: '1.1s' }} />
-                </div>
-                <div className="flex items-center gap-2 bg-primary/5 px-3 py-1.5 rounded-lg">
-                    <div className="w-4 h-4 bg-muted rounded animate-pulse" style={{ animationDelay: '1.2s' }} />
-                    <div className="h-4 bg-muted rounded w-12 animate-pulse" style={{ animationDelay: '1.3s' }} />
-                </div>
+                <div className="h-4 bg-muted skeleton rounded w-24" />
+                <div className="h-8 bg-primary/5 skeleton rounded-lg w-16" />
             </div>
         </div>
     );
